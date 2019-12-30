@@ -136,10 +136,7 @@
                 function transition(d) {
                   // todo: make new sankey object based on d and send to display sankey function
                   
-                  
-                  comb(d);
-                  var arr2 = arr1;
-                  getPath(root);
+                  comb(d, d.depth);
 
                   //create array of strings with names of children regions and regions that children regions are connected to.
                   
@@ -255,28 +252,31 @@
             }
 
 
-            function comb(d){
+            function comb(d, dep){
+
               if(d.data.connections){
                 for (i in d.data.connections){
-                  console.log(d.data.connections[i]);
-                  getPath(root, d.data.connections[i]);
+                  getPath(root, d.data.connections[i], dep);
                 }
               }
               if (d.children){
                 for (i in d.children)
-                  comb(d.children[i]);
+                  comb(d.children[i], dep);
               }
             }
             
-            function getPath(e, element){
+            function getPath(e, element, dep){
                 if (e.data.name == element){
-                console.log(e);
+                  var f = e;
+                  for (i = 1; i <= f.depth - dep; i++){
+                    f = f.parent;
+                  }
+                  console.log(f.data.name);
                 }
                 if (e.children){
                   for (i in e.children)
-                    getPath(e.children[i], element);
+                    getPath(e.children[i], element, dep);
                 }
             }
-              
             
         });

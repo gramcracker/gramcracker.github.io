@@ -7,7 +7,6 @@
             "altTitles":["Cerebrum"],
             "tags":[],
             "value":75,
-            "connections":["Thalamus", "Hypothalamus"],
             "children": [
                 {
                     "name":"Cerebral Cortex",
