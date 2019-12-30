@@ -135,8 +135,13 @@
                     .attr("class", "textdiv"); //textdiv class allows us to style the text easily with CSS
                 function transition(d) {
                   // todo: make new sankey object based on d and send to display sankey function
+                  var sankeyMap = {
+                    nodes: [{name:d.data.name}],
+                    links: []
+                  };
                   
-                  comb(d, d.depth);
+                  comb(d, d.depth, sankeyMap);
+                  console.log(sankeyMap);
 
                   //create array of strings with names of children regions and regions that children regions are connected to.
                   
@@ -252,31 +257,49 @@
             }
 
 
-            function comb(d, dep){
+            function comb(d, dep, map){
 
               if(d.data.connections){
                 for (i in d.data.connections){
-                  getPath(root, d.data.connections[i], dep);
+                  getPath(root, d.data.connections[i], dep, map);
                 }
               }
               if (d.children){
                 for (i in d.children)
-                  comb(d.children[i], dep);
+                  comb(d.children[i], dep, map);
               }
             }
             
-            function getPath(e, element, dep){
+            function getPath(e, element, dep, map){
                 if (e.data.name == element){
                   var f = e;
                   for (i = 1; i <= f.depth - dep; i++){
                     f = f.parent;
                   }
-                  console.log(f.data.name);
+                  
+                  addPath(map, f.data.name);
+                
                 }
+
                 if (e.children){
                   for (i in e.children)
-                    getPath(e.children[i], element, dep);
+                    getPath(e.children[i], element, dep, map);
                 }
+            }
+
+            function addPath(map, node2){
+              for ( i in map.nodes){
+                
+                var target;
+                if (map.nodes[i] == node2){
+                  target = i;
+                }else if(i == map.nodes.length - 1){
+                  map.nodes.push({"name":node2});
+                  target = i+1;
+                }
+              }
+              map.links.push({"source":0,"target":target,"value":1});
+              return map;
             }
             
         });

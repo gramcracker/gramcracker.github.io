@@ -14,7 +14,7 @@
                     "children": [
                         {"name":"Frontal Lobe","value":10},
                         {"name":"Parietal Lobe","value":10},
-                        {"name":"Occipital Lobe","value":10},
+                        {"name":"Occipital Lobe","value":10, "connections":["Thalamus"]},
                         {"name":"Temporal Lobe","value":10}
                     ]
 
