@@ -140,9 +140,14 @@
                     links: []
                   };
                   if(d.children){
-                    for (i in d.children){
+                    for (var i = 0; i < d.children.length; i++){
+                    
+                    if (! sankeyMap.nodes.some(n => n.name === d.children[i].data.name)){
                       sankeyMap.nodes.push({ name: d.children[i].data.name })
-                      comb(d.children[i], d.children[i].depth, sankeyMap, i);
+                    }
+
+                    
+                    comb(d.children[i], d.children[i].depth, sankeyMap, i);
                     }
                   }
                   console.log(sankeyMap);
@@ -262,22 +267,25 @@
 
 
             function comb(d, dep, map, ref){
+              console.log(i);
+
+              if (d.children){
+                for (var i in d.children)
+                  comb(d.children[i], dep, map, ref);
+              }
               
               if(d.data.connections){
-                for (i in d.data.connections){
+                for (var i in d.data.connections){
                   getPath(root, d.data.connections[i], dep, map, ref);
                 }
               }
-              if (d.children){
-                for (i in d.children)
-                  comb(d.children[i], dep, map, ref);
-              }
+              
             }
             
             function getPath(e, element, dep, map, ref){
                 if (e.data.name == element){
                   var f = e;
-                  for (i = 1; i <= f.depth - dep; i++){
+                  for (var i = 1; i <= f.depth - dep; i++){
                     f = f.parent;
                   }
                   
@@ -286,7 +294,7 @@
                 }
 
                 if (e.children){
-                  for (i in e.children)
+                  for (var i in e.children)
                     getPath(e.children[i], element, dep, map, ref);
                 }
             }
@@ -294,10 +302,9 @@
             function addPath(map, node2, node1){
               var target;
               if (! map.nodes.some(n => n.name === node2)){
-                map.nodes.push({"name":node2});
+                map.nodes.push({ name:node2 });
               }
               target = map.nodes.findIndex(n => n.name === node2);
-              console.log(target);
               map.links.push({"source":node1,"target":target,"value":1});
               return map;
             }
