@@ -136,11 +136,15 @@
                 function transition(d) {
                   // todo: make new sankey object based on d and send to display sankey function
                   var sankeyMap = {
-                    nodes: [{name:d.data.name}],
+                    nodes: [],
                     links: []
                   };
-                  
-                  comb(d, d.depth, sankeyMap);
+                  if(d.children){
+                    for (i in d.children){
+                      sankeyMap.nodes.push({ name: d.children[i].data.name })
+                      comb(d.children[i], d.children[i].depth, sankeyMap, i);
+                    }
+                  }
                   console.log(sankeyMap);
 
                   //create array of strings with names of children regions and regions that children regions are connected to.
@@ -257,48 +261,44 @@
             }
 
 
-            function comb(d, dep, map){
-
+            function comb(d, dep, map, ref){
+              
               if(d.data.connections){
                 for (i in d.data.connections){
-                  getPath(root, d.data.connections[i], dep, map);
+                  getPath(root, d.data.connections[i], dep, map, ref);
                 }
               }
               if (d.children){
                 for (i in d.children)
-                  comb(d.children[i], dep, map);
+                  comb(d.children[i], dep, map, ref);
               }
             }
             
-            function getPath(e, element, dep, map){
+            function getPath(e, element, dep, map, ref){
                 if (e.data.name == element){
                   var f = e;
                   for (i = 1; i <= f.depth - dep; i++){
                     f = f.parent;
                   }
                   
-                  addPath(map, f.data.name);
+                  addPath(map, f.data.name, ref);
                 
                 }
 
                 if (e.children){
                   for (i in e.children)
-                    getPath(e.children[i], element, dep, map);
+                    getPath(e.children[i], element, dep, map, ref);
                 }
             }
 
-            function addPath(map, node2){
-              for ( i in map.nodes){
-                
-                var target;
-                if (map.nodes[i] == node2){
-                  target = i;
-                }else if(i == map.nodes.length - 1){
-                  map.nodes.push({"name":node2});
-                  target = i+1;
-                }
+            function addPath(map, node2, node1){
+              var target;
+              if (! map.nodes.some(n => n.name === node2)){
+                map.nodes.push({"name":node2});
               }
-              map.links.push({"source":0,"target":target,"value":1});
+              target = map.nodes.findIndex(n => n.name === node2);
+              console.log(target);
+              map.links.push({"source":node1,"target":target,"value":1});
               return map;
             }
             
