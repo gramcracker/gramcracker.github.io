@@ -12,7 +12,7 @@
                     "name":"Cerebral Cortex",
                     "value":25,
                     "children": [
-                        {"name":"Frontal Lobe","value":10, "connections":["Thalamus"]},
+                        {"name":"Frontal Lobe","value":10, "connections":["Thalamus", "Hypothalamus", "Metencephalon"]},
                         {"name":"Parietal Lobe","value":10},
                         {"name":"Occipital Lobe","value":10},
                         {"name":"Temporal Lobe","value":10}

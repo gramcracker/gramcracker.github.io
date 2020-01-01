@@ -21,14 +21,16 @@ var svg2 = d3.select("#sankeyChart").append("svg")
 
 // Set the sankey diagram properties
 var sankey = d3.sankey()
-    .nodeWidth(36)
+    .nodeWidth(5)
     .nodePadding(40)
     .size([width, height]);
 
 var path = sankey.link();
 
 // load the data
-d3.json("sankey-formatted.json", function(error, graph) {
+function loadSankey(graph){
+
+  svg2.selectAll("g").remove();
 
   sankey
       .nodes(graph.nodes)
@@ -103,4 +105,4 @@ d3.json("sankey-formatted.json", function(error, graph) {
     sankey.relayout();
     link.attr("d", path);
   }
-});
+}

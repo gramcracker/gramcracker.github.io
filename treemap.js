@@ -84,13 +84,7 @@ d3.json("whitematter.json", function(data) {
         }
       }
       console.log(sankeyMap);
-      //create array of strings with names of children regions and regions that children regions are connected to.
-      //create aray of objects with a source region, target region, and value
-      // sankey
-      // .nodes(obj.regions)
-      // .links(obj.links)
-      // .layout(32);
-      // console.log(sankey)
+      loadSankey(sankeyMap);
       //end todo
       if (transitioning || !d) return;
       transitioning = true;
