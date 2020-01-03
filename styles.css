@@ -1,41 +1,54 @@
-#treemapChart {
-	  max-width: 100%;
-	  overflow:auto;
-	  background: #1f2021;
 
+body {
+	background-color: #24282e;
+}
+
+#treemapChart {
+	  width: 650px;
+	  overflow:auto;
+	}
+
+#sankeyChart {
+	  max-width: 650px;
 	}
 
 	text {
 	  pointer-events: none;
 	  font-family: "courier new";
+
 	}
 	.grandparent text {
 	  
 	}
-	rect {
-	  stroke: #1f2021;
-	  stroke-width: 1px;
+	rect{
+
+		stroke: grey;
+		stroke-opacity: .2;
+		stroke-width: 1px;
 	}
 	rect.parent,
 	.grandparent rect {
-	  stroke-width: 1px;
+
+
 	}
 	.grandparent:hover rect {
 	  fill: grey;
 	}
 	.children rect.parent,
 	.grandparent rect {
+
 	  cursor: pointer;
 	}
 	.children rect.child {
+
 	  opacity: 0;
 	}
 	.children rect.parent {
+
 	}
 	.children:hover rect.child {
 	  opacity: .7;
 	  transition: 1.0s;
-	  stroke-width: 1px;
 	}
 	.children:hover rect.parent {
 	  opacity: .2;
@@ -45,7 +58,7 @@
 /*	  margin-bottom:8px !important;*/
 	}
 	.legend rect {
-	  stroke-width: 0px;
+
 	}
 	.legend text {
 	  text-anchor: middle;
@@ -78,21 +91,20 @@
 
 .node rect {
   cursor: move;
-  fill-opacity: .9;
   shape-rendering: crispEdges;
 }
 
 .node text {
   pointer-events: none;
-  text-shadow: 0 1px 0 #fff;
+  font-size: 10px;
 }
 
 .link {
   fill: none;
-  stroke: #000;
-  stroke-opacity: .2;
+  stroke-opacity: .7;
 }
 
 .link:hover {
   stroke-opacity: .5;
+  stroke: #8f3d3d;
 }

@@ -1,63 +1,90 @@
 {
     "name": "Central Nervous System",
     "value":100,
-    "children":[
+    "children":
+    [
         {
-            "name": "Telencephalon",
-            "altTitles":["Cerebrum"],
-            "tags":[],
+            "name": "Forebrain",
             "value":75,
-            "children": [
+            "children":
+            [
                 {
-                    "name":"Cerebral Cortex",
-                    "value":25,
-                    "children": [
-                        {"name":"Frontal Lobe","value":10, "connections":["Thalamus", "Hypothalamus", "Metencephalon"]},
-                        {"name":"Parietal Lobe","value":10},
-                        {"name":"Occipital Lobe","value":10},
-                        {"name":"Temporal Lobe","value":10}
+                    "name": "Telencephalon",
+                    "altTitles":["Cerebrum"],
+                    "value":75,
+                    "children":
+                    [
+                        {
+                            "name":"Cerebral Cortex",
+                            "value":25,
+                            "children":
+                            [
+                                {"name":"Frontal Lobe","value":10, "connections":["Thalamus", "Hypothalamus", "Metencephalon"]},
+                                {"name":"Parietal Lobe","value":10},
+                                {"name":"Occipital Lobe","value":10},
+                                {"name":"Temporal Lobe","value":10}
+                            ]
+                        },
+                        {
+                            "name":"Basal Ganglia",
+                            "value":25,
+                            "children":
+                            [
+                                {"name":"Striatum","value":10},
+                                {"name":"Pallidum","value":10},
+                                {"name":"Substantia Nigra","value":10},
+                                {"name":"Subthalamic Nucleus","value":10}
+                            ]  
+                        }
                     ]
+                }, 
+                {
+                    "name": "Diencephalon",
+                    "value":75,
+                    "children":
+                    [
+                        {
+                            "name":"Thalamus",
+                            "value":25
+                        },
+                        {
+                            "name":"Hypothalamus",
+                            "value":25
+                        },
+                        {
+                            "name":"Mammillary bodies",
+                            "value":25
+                        }
 
-                },
-                {
-                    "name":"Basal Ganglia",
-                    "value":25,
-                    "children": [
-                        {"name":"Striatum","value":10},
-                        {"name":"Pallidum","value":10},
-                        {"name":"Substantia Nigra","value":10},
-                        {"name":"Subthalamic Nucleus","value":10}
                     ]
-                     
                 }
             ]
         },
         {
-            "name": "Diencephalon",
+            "name": "midbrain",
             "value":75,
-            "children": [
-                {"name":"Thalamus","value":25},
-                {"name":"Hypothalamus","value":25},
-                {"name":"Subthalamus","value":25},
-                {"name":"Epithalamus","value":25}
+            "children": [{
+                "name": "Mesencephalon",
+                "value":75,
+                "children": []
+            }]
+        },
+        {
+            "name": "Hindbrain",
+            "value":75,
+            "children":
+            [
+                {
+                    "name": "Metencephalon",
+                    "value":75,
+                    "children": []
+                },
+                {
+                    "name": "Myelencephalon",
+                    "value":75,
+                    "children": []
+                }
             ]
-             
-        },
-        {
-            "name":"Mesencephalon",
-            "value":75
-             
-        },
-        {
-            "name":"Metencephalon",
-            "value":75
-             
-        },
-        {
-            "name":"Myelencephalon",
-            "value":75
-             
         }
- 
     ]
 }

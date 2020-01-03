@@ -6,10 +6,15 @@
 	<script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/sankey.js"></script>
 </head>
 <body>
-	<p id="treemapChart"></p>
-	<div id="sankeyChart"></div>
-    <script src="treemap.js"></script>
-    <script src="sankey.js"></script>
-
+	<div class="container" align="center" >
+		<div style="display: inline-block; outline: 1px dashed grey; padding: 2px;" >
+		<text style="color:white">//Grey matter:</text>
+		<p id="treemapChart"></p>
+		<text style="color:white">//White matter:</text>
+		<div id="sankeyChart"/>
+		</div>
+	</div>
+	<script src="treemap.js"></script>
+	<script src="sankey.js"></script>
 </body>
 </html>

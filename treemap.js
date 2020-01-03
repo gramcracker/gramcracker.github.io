@@ -7,32 +7,47 @@
  * Author: Guglielmo Celata
  * Date: sept 1st 2017
  **/
-var el_id = 'treemapChart';
-var viewDepth = 0;
-var obj = document.getElementById(el_id);
-var divWidth = obj.offsetWidth;
+let el_id = 'treemapChart';
+let viewDepth = 0;
+let obj = document.getElementById(el_id);
+let divWidth = obj.offsetWidth;
 var margin = {
-    top: 25,
-    right: 0,
-    bottom: 0,
-    left: 0
+    top: 25
   },
-  width = divWidth - 1,
-  height = 200 - margin.top,
-  formatNumber = d3.format(","),
-  colorDomain = [0, 50, 90, 95, 100],
-  colorRange = ['#3b87b9', '#20c66c', '#e6d00d', '#e6710d', '#990099'],
-  transitioning;
+width = divWidth - 1,
+height = 200 - margin.top,
+formatNumber = d3.format(","),
+transitioning;
+
 // sets x and y scale to determine size of visible boxes
 var x = d3.scaleLinear().domain([0, width]).range([0, width]);
+
 var y = d3.scaleLinear().domain([0, height]).range([0, height]);
 // adding a color scale
-var color = d3.scaleLinear().domain(colorDomain).range(colorRange);
+var colorwheel = 0;
+
+var color = d3.scaleOrdinal(d3.schemeCategory20);
+
 var treemap = d3.treemap().size([width, height]).paddingInner(0).round(false);
-var svg = d3.select('#' + el_id).append("svg").attr("id", "treemap").attr("width", width + margin.left + margin.right).attr("height", height + margin.bottom + margin.top).style("margin-left", -margin.left + "px").style("margin.right", -margin.right + "px").append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")").style("shape-rendering", "crispEdges");
-var grandparent = svg.append("g").attr("class", "grandparent");
-grandparent.append("rect").attr("y", -margin.top).attr("width", width).attr("height", margin.top).attr("fill", '#bbbbbb');
-grandparent.append("text").attr("x", 6).attr("y", 6 - margin.top).attr("dy", ".75em");
+
+var svg = d3.select('#' + el_id)
+.append("svg").attr("id", "treemap")
+.attr("width", width)
+.attr("height", height + margin.top)
+.append("g").attr("transform", "translate(0," + margin.top + ")")
+.style("shape-rendering", "crispEdges");
+
+var grandparent = svg.append("g")
+.attr("class", "grandparent");
+
+grandparent.append("rect")
+.attr("y", -margin.top).attr("width", width)
+.attr("height", margin.top).attr("fill", '#bbbbbb');
+
+grandparent.append("text")
+.attr("x", 6).attr("y", 6 - margin.top)
+.attr("dy", ".75em");
+
 d3.json("whitematter.json", function(data) {
   var root = d3.hierarchy(data);
   treemap(root.sum(function(d) {
@@ -48,7 +63,7 @@ d3.json("whitematter.json", function(data) {
     grandparent.datum(d.parent).on("click", transition).select("text").text(name(d));
     // grandparent color
     grandparent.datum(d.parent).select("rect").attr("fill", function() {
-      return 'orange'
+      return 'grey'
     });
     var g1 = svg.insert("g", ".grandparent").datum(d).attr("class", "depth");
     var g = g1.selectAll("g").data(d.children).enter().append("g");
@@ -136,6 +151,7 @@ d3.json("whitematter.json", function(data) {
   }
 
   function rect(rect) {
+    colorwheel++;
     rect.attr("x", function(d) {
       return x(d.x0);
     }).attr("y", function(d) {
@@ -145,7 +161,8 @@ d3.json("whitematter.json", function(data) {
     }).attr("height", function(d) {
       return y(d.y1) - y(d.y0);
     }).attr("fill", function(d) {
-      return color(parseFloat(d.value / 2));
+      return color(colorwheel);
+
     });
   }
 
@@ -162,18 +179,7 @@ d3.json("whitematter.json", function(data) {
   }
 
   function name(d) {
-    return breadcrumbs(d) + (d.parent ? " -  Click to zoom out" : " - Click a square to zoom in");
-  }
-
-  function breadcrumbs(d) {
-    var res = "";
-    var sep = " > ";
-    d.ancestors().reverse().forEach(function(i) {
-      res += i.data.name + sep;
-    });
-    return res.split(sep).filter(function(i) {
-      return i !== "";
-    }).join(sep);
+    return d.data.name;
   }
 
   function comb(d, dep, map, ref) {

@@ -1,23 +1,18 @@
 var units = "Widgets";
 
 // set the dimensions and margins of the graph
-var margin = {top: 10, right: 10, bottom: 10, left: 10},
-    width = 700 - margin.left - margin.right,
-    height = 300 - margin.top - margin.bottom;
+var margin = {top: 0, right: 0, bottom: 0, left: 0},
+    height = 300;
 
 // format variables
 var formatNumber = d3.format(",.0f"),    // zero decimal places
-    format = function(d) { return formatNumber(d) + " " + units; },
-    color = d3.scaleOrdinal(d3.schemeCategory20);
+    format = function(d) { return formatNumber(d) + " " + units; };
 
 // append the svg object to the body of the page
 var svg2 = d3.select("#sankeyChart").append("svg")
     .attr("id", "sankey")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", 
-          "translate(" + margin.left + "," + margin.top + ")");
+    .attr("width", width)
+    .attr("height", height + 20);
 
 // Set the sankey diagram properties
 var sankey = d3.sankey()
@@ -32,11 +27,13 @@ function loadSankey(graph){
 
   svg2.selectAll("g").remove();
 
+  //uncomment to add filters
+  //const defs = svg.append('defs');
+
   sankey
       .nodes(graph.nodes)
       .links(graph.links)
       .layout(32);
-      console.log(sankey)
 
 // add in the links
   var link = svg2.append("g").selectAll(".link")
@@ -44,6 +41,7 @@ function loadSankey(graph){
     .enter().append("path")
       .attr("class", "link")
       .attr("d", path)
+      .style("stroke", "grey")
       .style("stroke-width", function(d) { return Math.max(1, d.dy); })
       .sort(function(a, b) { return b.dy - a.dy; });
 
@@ -73,10 +71,10 @@ function loadSankey(graph){
   node.append("rect")
       .attr("height", function(d) { return d.dy; })
       .attr("width", sankey.nodeWidth())
-      .style("fill", function(d) { 
-      return d.color = color(d.name.replace(/ .*/, "")); })
-      .style("stroke", function(d) { 
-      return d3.rgb(d.color).darker(2); })
+      .style("fill", function(d) {
+        colorwheel++;
+        return d.color = color(colorwheel); })
+      .style("stroke-width", 0)
     .append("title")
       .text(function(d) { 
       return d.name + "\n" + format(d.value); });
