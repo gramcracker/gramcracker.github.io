@@ -67,9 +67,11 @@ d3.json("whitematter.json", function(data) {
     });
     var g1 = svg.insert("g", ".grandparent").datum(d).attr("class", "depth");
     var g = g1.selectAll("g").data(d.children).enter().append("g");
+
     // add class and click handler to all g's with children
     g.filter(function(d) {
       return d.children;
+      
     }).classed("children", true).on("click", transition);
     g.selectAll(".child").data(function(d) {
       return d.children || [d];
@@ -82,25 +84,14 @@ d3.json("whitematter.json", function(data) {
     g.append("foreignObject").call(rect).attr("class", "foreignobj").append("xhtml:div").attr("dy", ".75em").html(function(d) {
       return '' + '<p class="title"> ' + d.data.name + '</p>' + '<p>' + formatNumber(d.value) + '</p>';
     }).attr("class", "textdiv"); //textdiv class allows us to style the text easily with CSS
+
+    generateSankey(d);
+
     function transition(d) {
-      // todo: make new sankey object based on d and send to display sankey function
-      var sankeyMap = {
-        nodes: [],
-        links: []
-      };
-      if (d.children) {
-        for (let i = 0; i < d.children.length; i++) {
-          if (!sankeyMap.nodes.some(n => n.name === d.children[i].data.name)) {
-            sankeyMap.nodes.push({
-              name: d.children[i].data.name
-            })
-          }
-          comb(d.children[i], d.children[i].depth, sankeyMap, i);
-        }
-      }
-      console.log(sankeyMap);
-      loadSankey(sankeyMap);
-      //end todo
+
+      generateSankey(d);
+
+      
       if (transitioning || !d) return;
       transitioning = true;
       var g2 = display(d),
@@ -221,4 +212,26 @@ d3.json("whitematter.json", function(data) {
     });
     return map;
   }
+
+  function generateSankey(d){
+
+          var sankeyMap = {
+        nodes: [],
+        links: []
+      };
+      if (d.children) {
+        for (let i = 0; i < d.children.length; i++) {
+          if (!sankeyMap.nodes.some(n => n.name === d.children[i].data.name)) {
+            sankeyMap.nodes.push({
+              name: d.children[i].data.name
+            })
+          }
+          comb(d.children[i], d.children[i].depth, sankeyMap, i);
+        }
+      }
+      console.log(sankeyMap);
+      loadSankey(sankeyMap);
+
+  }
+
 });

@@ -1,17 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+	<meta charset="utf-8">
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="styles.css">
 	<script src="https://d3js.org/d3.v4.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/sankey.js"></script>
 </head>
 <body>
 	<div class="container" align="center" >
-		<div style="display: inline-block; outline: 1px dashed grey; padding: 2px;" >
-		<text style="color:white">//Grey matter:</text>
-		<p id="treemapChart"></p>
-		<text style="color:white">//White matter:</text>
-		<div id="sankeyChart"/>
+		<div class="container" >
+			<div align="left" style="display: inline-block; outline: 1px solid grey; padding: 4px;" >
+				<!-- Search form -->
+				<div class="md-form mb-3">
+				 	<input class="form-control" type="text" placeholder="Search" aria-label="Search" style="background: none">
+				</div>
+				<text style="color:white; font-size:12px">//Grey matter:</text>
+				<div id="treemapChart"></div>
+				<text style="color:white; font-size:12px">//White matter:</text>
+				<div id="sankeyChart">
+				</div>
+			</div>
 		</div>
 	</div>
 	<script src="treemap.js"></script>

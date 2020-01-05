@@ -4,12 +4,8 @@ body {
 }
 
 #treemapChart {
-	  width: 650px;
+	  width: 750px;
 	  overflow:auto;
-	}
-
-#sankeyChart {
-	  max-width: 650px;
 	}
 
 	text {

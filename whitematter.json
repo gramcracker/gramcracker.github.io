@@ -26,6 +26,31 @@
                             ]
                         },
                         {
+                            "name": "Hippocampus",
+                            "altTitles": ["Archicortex"],
+                            "value": 25,
+                            "children":
+                            [
+                                {
+                                    "name": "CA1",
+                                    "value":10
+                                    
+                                },
+                                {
+                                    "name": "CA2",
+                                    "value":10
+                                },
+                                {
+                                    "name": "CA3",
+                                    "value":10
+                                },
+                                {
+                                    "name": "CA4",
+                                    "value":10
+                                }
+                            ]
+                        },
+                        {
                             "name":"Basal Ganglia",
                             "value":25,
                             "children":
