@@ -86,7 +86,7 @@
             ]
         },
         {
-            "name": "midbrain",
+            "name": "Midbrain",
             "value":75,
             "children": [{
                 "name": "Mesencephalon",

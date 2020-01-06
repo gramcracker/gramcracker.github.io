@@ -74,7 +74,7 @@ body {
 	    font-size: 102%;
 	    font-weight: bold;
 	    margin-top: 8px;
-	    font-size:12px !important;
+	    font-size:13px !important;
 	}
 	.textdiv p{
 	    line-height: 13px;
@@ -90,7 +90,7 @@ body {
 
 .node text {
   pointer-events: none;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .link {

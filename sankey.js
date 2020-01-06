@@ -1,5 +1,7 @@
 var units = "Widgets";
 
+var defaultNodeHeight = 15;
+
 // set the dimensions and margins of the graph
 var margin = {top: 0, right: 0, bottom: 0, left: 0},
     height = 300;
@@ -57,8 +59,15 @@ function loadSankey(graph){
     .enter().append("g")
       .attr("class", "node")
       .attr("transform", function(d) {
-      console.log(d); 
-        if(d.value == 0) d.x = 0.0;
+        if(d.value == 0) {
+          d.x = 0.0;
+          d.dy  = defaultNodeHeight;
+          if(graph.links.length == 0){
+            d.dy = (height / graph.nodes.length);
+            d.y = d.y * (height / graph.nodes.length);
+
+          }
+        }
       return "translate(" + d.x + "," + d.y + ")"; })
       .call(d3.drag()
         .subject(function(d) {
@@ -71,7 +80,8 @@ function loadSankey(graph){
 
 // add the rectangles for the nodes
   node.append("rect")
-      .attr("height", function(d) { return Math.max(1, d.dy); })
+      .attr("height", function(d) {
+       return Math.max(1, d.dy); })
       .attr("width", sankey.nodeWidth())
       .style("fill", function(d) {
         colorwheel++;
