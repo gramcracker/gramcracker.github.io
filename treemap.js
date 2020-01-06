@@ -223,7 +223,7 @@ d3.json("whitematter.json", function(data) {
         for (let i = 0; i < d.children.length; i++) {
           if (!sankeyMap.nodes.some(n => n.name === d.children[i].data.name)) {
             sankeyMap.nodes.push({
-              name: d.children[i].data.name
+              name: d.children[i].data.name,
             })
           }
           comb(d.children[i], d.children[i].depth, sankeyMap, i);

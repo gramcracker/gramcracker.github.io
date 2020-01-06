@@ -43,20 +43,22 @@ function loadSankey(graph){
       .attr("d", path)
       .style("stroke", "grey")
       .style("stroke-width", function(d) { return Math.max(1, d.dy); })
-      .sort(function(a, b) { return b.dy - a.dy; });
+      .sort(function(a, b) { return d3.descending(a.dy, b.dy);});
 
 // add the link titles
   link.append("title")
         .text(function(d) {
         return d.source.name + " → " + 
-                d.target.name + "\n" + format(d.value); });
+                d.target.name });
 
 // add in the nodes
   var node = svg2.append("g").selectAll(".node")
       .data(graph.nodes)
     .enter().append("g")
       .attr("class", "node")
-      .attr("transform", function(d) { 
+      .attr("transform", function(d) {
+      console.log(d); 
+        if(d.value == 0) d.x = 0.0;
       return "translate(" + d.x + "," + d.y + ")"; })
       .call(d3.drag()
         .subject(function(d) {
@@ -69,7 +71,7 @@ function loadSankey(graph){
 
 // add the rectangles for the nodes
   node.append("rect")
-      .attr("height", function(d) { return d.dy; })
+      .attr("height", function(d) { return Math.max(1, d.dy); })
       .attr("width", sankey.nodeWidth())
       .style("fill", function(d) {
         colorwheel++;
@@ -89,7 +91,10 @@ function loadSankey(graph){
       .text(function(d) { return d.name; })
     .filter(function(d) { return d.x < width / 2; })
       .attr("x", 6 + sankey.nodeWidth())
-      .attr("text-anchor", "start");
+      .attr("text-anchor", "start")
+      .style("fill", function(d) {
+        return d.value > 0 ? "black": "white";
+      });
 
 // the function for moving the nodes
   function dragmove(d) {
