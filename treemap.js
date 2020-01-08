@@ -68,7 +68,7 @@ d3.json("whitematter.json", function(d) {
 
     // write text into grandparent
     // and activate click's handler
-    grandparent.datum(d.parent).on("click", transition).select("text").text(name(d));
+    grandparent.datum(d.parent).on("click", d => transition(d)).select("text").text(name(d));
     // grandparent color
     grandparent.datum(d.parent).select("rect").attr("fill", function() {
       return 'grey'
@@ -80,7 +80,7 @@ d3.json("whitematter.json", function(d) {
     g.filter(function(d) {
       return d.children;
       
-    }).classed("children", true).on("click", transition);
+    }).classed("children", true).on("click", d => transition(d));
     g.selectAll(".child").data(function(d) {
       return d.children || [d];
     }).enter().append("rect").attr("class", "child").call(rect);
@@ -95,9 +95,12 @@ d3.json("whitematter.json", function(d) {
 
     generateSankey(d);
 
-    function transition(d) {
 
-      focus = d;
+
+
+    window.transition = function (d) {
+
+      d != undefined ? focus = d : d = focus;
 
       generateSankey(d);
 
@@ -141,7 +144,7 @@ d3.json("whitematter.json", function(d) {
       });
     }
     return g;
-  }
+  };
 
   function text(text) {
     text.attr("x", function(d) {
