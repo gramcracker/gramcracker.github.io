@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="styles.css">
 	<script src="https://d3js.org/d3.v4.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/sankey.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 	<div class="container" align="center" >
@@ -15,15 +16,22 @@
 				<div class="md-form mb-3">
 				 	<input class="form-control" type="text" placeholder="Search" aria-label="Search" style="background: none">
 				</div>
-				<text style="color:white; font-size:12px">//Grey matter:</text>
+				<text style="color:white; font-size:13px">//Grey matter:</text>
 				<div id="treemapChart"></div>
-				<text style="color:white; font-size:12px">//White matter:</text>
+				<text style="color:white; font-size:13px">//White matter:</text>
 				<div id="sankeyChart">
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<ul class='custom_menu'>
+	  <li data-action = "view_outgoing">view outgoing</li>
+	  <li data-action = "view_incoming">view incoming</li>
+	</ul>
+
 	<script src="treemap.js"></script>
+	<script src="contextmenu.js"></script>
 	<script src="sankey.js"></script>
 </body>
 </html>

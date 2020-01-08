@@ -92,19 +92,22 @@ function loadSankey(graph){
       return d.name + "\n" + format(d.value); });
 
 // add in the title for the nodes
-  node.append("text")
+    nodeText =  node.append("text")
       .attr("x", -6)
       .attr("y", function(d) { return d.dy / 2; })
       .attr("dy", ".35em")
       .attr("text-anchor", "end")
       .attr("transform", null)
       .text(function(d) { return d.name; })
-    .filter(function(d) { return d.x < width / 2; })
+      .on("contextmenu", function(d) {
+        contextmenu(d);
+      })
+      .filter(function(d) { return d.x < width / 2; })
       .attr("x", 6 + sankey.nodeWidth())
       .attr("text-anchor", "start")
       .style("fill", function(d) {
-        return d.value > 0 ? "black": "white";
-      });
+        return d.value > 0 ? "black": "white";});
+      
 
 // the function for moving the nodes
   function dragmove(d) {

@@ -1,16 +1,27 @@
 
+
+@font-face {
+   font-family: LiberationSans; 
+   src: url('fonts/LiberationSans-Regular-webfont.woff');
+} 
+
+
 body {
 	background-color: #24282e;
+	font-family: LiberationSans;
 }
 
 #treemapChart {
 	  width: 750px;
 	  overflow:auto;
 	}
+#sankeyChart {
+	overflow: hidden;
+}
 
 	text {
 	  pointer-events: none;
-	  font-family: "courier new";
+	  font-family: "LiberationSans";
 
 	}
 	.grandparent text {
@@ -70,7 +81,7 @@ body {
 	    overflow:none;
 	}
 	.textdiv .title {
-		font-family: "courier new";
+		font-family: "LiberationSans";
 	    font-size: 102%;
 	    font-weight: bold;
 	    margin-top: 8px;
@@ -89,7 +100,8 @@ body {
 }
 
 .node text {
-  pointer-events: none;
+	cursor: move;
+  pointer-events: auto;
   font-size: 13px;
 }
 
@@ -100,5 +112,31 @@ body {
 
 .link:hover {
   stroke-opacity: .5;
-  stroke: #8f3d3d;
+}
+
+.custom_menu {
+	padding: 0;
+	display: none;
+	list-style-type:none;
+    z-index: 1000;
+    position: absolute;
+    overflow: hidden;
+    border: 1px solid black;
+    white-space: nowrap;
+    font-family: LiberationSans;
+    font-size: 14px;
+
+    background: black;
+    opacity: .7;
+    color: white;
+    
+}
+
+.custom_menu li {
+    padding: 1px 10px;
+    cursor: pointer;
+}
+
+.custom_menu li:hover {
+    background-color: #8f3d3d;
 }
