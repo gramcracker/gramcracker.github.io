@@ -1,10 +1,12 @@
 {
     "name": "Central Nervous System",
+    "altTitles":["Encephalon"],
     "value":100,
     "children":
     [
         {
             "name": "Forebrain",
+            "altTitles":["Prosencephalon"],
             "value":75,
             "children":
             [
@@ -87,15 +89,13 @@
         },
         {
             "name": "Midbrain",
+            "altTitles":["Mesencephalon"],
             "value":75,
-            "children": [{
-                "name": "Mesencephalon",
-                "value":75,
-                "children": []
-            }]
+            "children": []
         },
         {
             "name": "Hindbrain",
+            "altTitles":["Rhombencephalon"],
             "value":75,
             "children":
             [

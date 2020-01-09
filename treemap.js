@@ -1,15 +1,6 @@
-/**
- * Interactive, zoomable treemap, using D3 v4
- *
- * A port to D3 v4 of Jacques Jahnichen's Block, using the same budget data
- * see: http://bl.ocks.org/JacquesJahnichen/42afd0cde7cbf72ecb81
- *
- * Author: Guglielmo Celata
- * Date: sept 1st 2017
- **/
-let el_id = 'treemapChart';
+let chart = 'treemapChart';
 let viewDepth = 0;
-let obj = document.getElementById(el_id);
+let obj = document.getElementById(chart);
 let divWidth = obj.offsetWidth;
 var margin = {
     top: 25
@@ -32,7 +23,7 @@ let color = d3.scaleOrdinal(d3.schemeCategory20);
 
 let treemap = d3.treemap().size([width, height]).paddingInner(0).round(false);
 
-let svg = d3.select('#' + el_id)
+let svg = d3.select('#' + chart)
 .append("svg").attr("id", "treemap")
 .attr("width", width)
 .attr("height", height + margin.top)
@@ -90,7 +81,8 @@ d3.json("whitematter.json", function(d) {
     });
     /* Adding a foreign object instead of a text object, allows for text wrapping */
     g.append("foreignObject").call(rect).attr("class", "foreignobj").append("xhtml:div").attr("dy", ".75em").html(function(d) {
-      return '' + '<p class="title"> ' + d.data.name + '</p>' + '<p>' + formatNumber(d.value) + '</p>';
+      let t = d.data.altTitles ? "/" + d.data.altTitles.join("<br>/") : "" ;
+      return '' + '<p class="title"> ' + d.data.name + '</p>' + '<p>' + t + '</p>';
     }).attr("class", "textdiv"); //textdiv class allows us to style the text easily with CSS
 
     generateSankey(d);
@@ -197,32 +189,53 @@ d3.json("whitematter.json", function(d) {
     }
   }
 
-  function getPath(e, element, dep, map, ref) {
-    if (e.data.name == element) {
+  function getPath(e, name, dep, map, ref) {
+    if (e.data.name == name) {
       let f = e;
-      for (let i = 1; i <= f.depth - dep; i++) {
-        f = f.parent;
+
+      if(f.depth > dep){
+        while(f.depth != dep){
+          f = f.parent;
+        }
       }
+
       addPath(map, f.data.name, ref);
     }
     if (e.children) {
-      for (let i in e.children) getPath(e.children[i], element, dep, map, ref);
+      for (let i in e.children) getPath(e.children[i], name, dep, map, ref);
     }
   }
 
-  function addPath(map, node2, node1) {
-    let target;
-    if (!map.nodes.some(n => n.name === node2)) {
-      map.nodes.push({
-        name: node2
-      });
+  function addPath(map, destination, origin) {
+    let target = 0;
+    //todo copies need to be accessible from node
+    var copies = false;
+    //iterate over nodes in the sankey object
+    for(i = 0; i < map.nodes.length; i++) {
+      //target equals location of node with title of destination
+      if (map.nodes[i].name === destination) {
+        target = i;
+        //if the destination location is the same as the origin copies++
+        if(target == origin && copies == false){
+          console.log(i);
+          map.nodes.push({ name: destination });
+          target = map.nodes.length;
+          copies = true;
+        }
+      }
+       else if(i == map.nodes.length - 1){
+        map.nodes.push({ name: destination });
+        target = i+1;
+      }
+
     }
-    target = map.nodes.findIndex(n => n.name === node2);
+
     map.links.push({
-      "source": node1,
+      "source": origin,
       "target": target,
       "value": 1
     });
+    console.log(map);
     return map;
   }
 
@@ -243,7 +256,6 @@ d3.json("whitematter.json", function(d) {
           comb(d.children[i], d.children[i].depth, sankeyMap, i);
         }
       }
-      console.log(sankeyMap);
       loadSankey(sankeyMap);
 
   }
