@@ -199,6 +199,7 @@ d3.json("whitematter.json", function(d) {
         }
       }
 
+
       addPath(map, f.data.name, ref);
     }
     if (e.children) {
@@ -206,32 +207,28 @@ d3.json("whitematter.json", function(d) {
     }
   }
 
-  function addPath(map, destination, origin) {
+  function addPath(map, destinationName, originIndex) {
     let target = 0;
-    //todo copies need to be accessible from node
     var copies = false;
-    //iterate over nodes in the sankey object
     for(i = 0; i < map.nodes.length; i++) {
-      //target equals location of node with title of destination
-      if (map.nodes[i].name === destination) {
+      if (map.nodes[i].name === destinationName) {
         target = i;
-        //if the destination location is the same as the origin copies++
-        if(target == origin && copies == false){
+        if(target == originIndex && i == map.nodes.length - 1){
           console.log(i);
-          map.nodes.push({ name: destination });
+          map.nodes.push({ name: destinationName });
           target = map.nodes.length;
           copies = true;
         }
       }
        else if(i == map.nodes.length - 1){
-        map.nodes.push({ name: destination });
+        map.nodes.push({ name: destinationName });
         target = i+1;
       }
 
     }
 
     map.links.push({
-      "source": origin,
+      "source": originIndex,
       "target": target,
       "value": 1
     });
