@@ -22,13 +22,13 @@ function contextOptions(d, i) {
 		case 0:
 			focus.children.forEach(function(n) {
 				if (n.data.name == d.name && n.children) {
-					transition(n);
+					transition(n.parent);
 					return;
 				}
 					
 			});
 
-			let e = searchNodes(root, d.name);
+			searchNodes(root, d.name);
 			break;
 		case 1:
 			break;
