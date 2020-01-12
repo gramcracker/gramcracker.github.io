@@ -145,3 +145,16 @@ rect.parent,
 	background-color: #8f3d3d;
 }
 
+
+/*Search Bar*/
+#Search {
+	background: #0e0f12;
+	box-shadow: 0px 0px 5px #0e0f12;
+	border: none;
+}
+
+
+/*Web Links*/
+#web_links {
+	font-size: 12px
+}

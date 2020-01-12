@@ -36,7 +36,9 @@ function contextOptions(d, i) {
 
 function searchNodes(d, s) {
 	s = s.toLowerCase();
-	if (d.data.name == s || d.data.alttitles.includes(s)) {
+	console.log(d);
+	let alt = d.data.alttitles ? d.data.alttitles: [];
+	if (d.data.name == s || alt.includes(s)) {
 		transition(d.parent);
 		return;
 	}
@@ -55,7 +57,7 @@ function search(s) {
 function getIncoming(d, s){
 
 	if( d.data.connections.includes(s)){
-		//addPath()
+
 	}
 
 	if (d.children) {

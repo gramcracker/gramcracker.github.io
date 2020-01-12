@@ -13,7 +13,7 @@
 		<div class="container" >
 			<div align="left" style="display: inline-block; padding: 5px; border: 1px solid #353b45; margin: 10px" >
 				<div class="md-form mb-3" style="margin-right: 50px; margin-left: 50px; margin-top: 15px">
-					<input class="form-control" id="Search" type="text" placeholder="Search" style="background: #0e0f12; box-shadow: 0px 0px 5px #0e0f12; border: none;" >
+					<input class="form-control" id="Search" type="text" placeholder="Search" onfocus="this.placeholder = ''" >
 				</div>
 				<text style="color:#8992a1; font-size:13px">//Grey matter:</text>
 				<div id="treemapChart"></div>
@@ -21,6 +21,25 @@
 				<div id="sankeyChart">
 				</div>
 			</div>
+			<ul id="web_links">
+				<li>
+					<a href="https://raw.githubusercontent.com/gramcracker/gramcracker.github.io/master/whitematter.json">
+						<text>//Json</text>
+					</a>
+				</li>
+				<li>
+					<a href="https://github.com/gramcracker/gramcracker.github.io">
+						<text>//Project</text>
+					</a>
+				</li>
+				<li>
+					<a href="https://ko-fi.com/joshcollins">
+						<text>//Buy me coffee ☕</text>
+					</a>
+				</li>
+
+			</ul>
+			
 		</div>
 	</div>
 
@@ -36,6 +55,7 @@
 		$("#Search").keydown(function(event) {
 			if(event.keyCode === 13){
 				search($("#Search").val());
+				$("#Search").val("")
 			}
 		});
 	</script>
