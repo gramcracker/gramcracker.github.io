@@ -25,7 +25,6 @@ function contextOptions(d, i) {
 					transition(n.parent);
 					return;
 				}
-					
 			});
 
 			searchNodes(root, d.name);
@@ -35,15 +34,33 @@ function contextOptions(d, i) {
 	}
 }
 
-
 function searchNodes(d, s) {
-	if (d.data.name == s) {
+	s = s.toLowerCase();
+	if (d.data.name == s || d.data.alttitles.includes(s)) {
 		transition(d.parent);
-		return;	
+		return;
 	}
 	if (d.children) {
 		for (let i in d.children) {
 			searchNodes(d.children[i], s);
-		} 
+		}
+	}
+}
+
+function search(s) {
+	searchNodes(root, s);
+}
+
+
+function getIncoming(d, s){
+
+	if( d.data.connections.includes(s)){
+		//addPath()
+	}
+
+	if (d.children) {
+		for (let i in d.children) {
+			getIncoming(d.children[i], s);
+		}
 	}
 }

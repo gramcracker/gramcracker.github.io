@@ -81,7 +81,7 @@ d3.json("whitematter.json", function(d) {
     });
     /* Adding a foreign object instead of a text object, allows for text wrapping */
     g.append("foreignObject").call(rect).attr("class", "foreignobj").append("xhtml:div").attr("dy", ".75em").html(function(d) {
-      let t = d.data.altTitles ? "/" + d.data.altTitles.join("<br>/") : "" ;
+      let t = d.data.alttitles ? "/" + d.data.alttitles.join("<br>/") : "" ;
       return '' + '<p class="title"> ' + d.data.name + '</p>' + '<p>' + t + '</p>';
     }).attr("class", "textdiv"); //textdiv class allows us to style the text easily with CSS
 
@@ -176,6 +176,22 @@ d3.json("whitematter.json", function(d) {
 
   function name(d) {
     return d.data.name;
+    //uncomment when arrow glyphs are set up.
+    //return breadcrumbs(d);
+  }
+
+  function breadcrumbs(d) {
+    var res = "";
+    var sep = " <";
+    d.ancestors().forEach(function(i){
+      res += i.data.name + sep;
+    });
+    return res
+    .split(sep)
+    .filter(function(i){
+      return i!== "";
+    })
+    .join(sep);
   }
 
   function comb(d, dep, map, ref) {

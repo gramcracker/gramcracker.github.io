@@ -11,14 +11,13 @@
 <body>
 	<div class="container" align="center" >
 		<div class="container" >
-			<div align="left" style="display: inline-block; outline: 1px solid grey; padding: 4px;" >
-				<!-- Search form -->
-				<div class="md-form mb-3">
-				 	<input class="form-control" type="text" placeholder="Search" aria-label="Search" style="background: none">
+			<div align="left" style="display: inline-block; padding: 5px; border: 1px solid #353b45; margin: 10px" >
+				<div class="md-form mb-3" style="margin-right: 50px; margin-left: 50px; margin-top: 15px">
+					<input class="form-control" id="Search" type="text" placeholder="Search" style="background: #0e0f12; box-shadow: 0px 0px 5px #0e0f12; border: none;" >
 				</div>
-				<text style="color:white; font-size:13px">//Grey matter:</text>
+				<text style="color:#8992a1; font-size:13px">//Grey matter:</text>
 				<div id="treemapChart"></div>
-				<text style="color:white; font-size:13px">//White matter:</text>
+				<text style="color:#8992a1; font-size:13px">//White matter:</text>
 				<div id="sankeyChart">
 				</div>
 			</div>
@@ -33,5 +32,12 @@
 	<script src="treemap.js"></script>
 	<script src="contextmenu.js"></script>
 	<script src="sankey.js"></script>
+	<script>
+		$("#Search").keydown(function(event) {
+			if(event.keyCode === 13){
+				search($("#Search").val());
+			}
+		});
+	</script>
 </body>
 </html>
