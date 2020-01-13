@@ -30,6 +30,9 @@ function contextOptions(d, i) {
 			searchNodes(root, d.name);
 			break;
 		case 1:
+
+			generateIncomingSankey(root, d);
+
 			break;
 	}
 }
@@ -53,16 +56,59 @@ function search(s) {
 	searchNodes(root, s);
 }
 
+function generateIncomingSankey(d, e){
+	let sankeyMap = {
+		nodes: [],
+		links: []
+	};
+	sankeyMap.nodes.push({
+		name: e.name,
+		value: 1
+	})
+	sankeyMap = getIncoming(sankeyMap, d, e);
+	if (sankeyMap.links.size > 0) loadSankey(sankeyMap);
 
-function getIncoming(d, s){
+}
 
-	if( d.data.connections.includes(s)){
+function getIncoming(map, d, e){
+	console.log(d);
+	if( d.data.connections && d.data.connections.includes(e.name)){
+		let f = d;
+		if(f.depth > e.depth){
+        while(f.depth != e.depth){
+          f = f.parent;
+        }
+      }
 
-	}
+	let target = 0;
+	let originIndex = 0;
+    for(i = 0; i < map.nodes.length; i++) {
+      if (map.nodes[i].name === f.data.name) {
+        originIndex = i;
+        if(0 == originIndex && i == map.nodes.length - 1){
+          map.nodes.push({ name: f.data.name });
+          originIndex = map.nodes.length;
+        }
+      }
+       else if(i == map.nodes.length - 1){
+        map.nodes.push({ name: f.data.name });
+        originIndex = i+1;
+      }
 
+    }
+
+    map.links.push({
+      "source": originIndex,
+      "target": 0,
+      "value": 1
+    });
+
+}
 	if (d.children) {
 		for (let i in d.children) {
-			getIncoming(d.children[i], s);
+			getIncoming(map, d.children[i], e);
 		}
 	}
+
+	return map;
 }

@@ -43,7 +43,7 @@
                                             [
                                                 {"name":"dorsomedial pfc","value":10},
                                                 {"name":"dorsolateral pfc","value":10},
-                                                {"name":"venterolateral pfc","value":10, "connections": ["metencephalon","thalamus"]},
+                                                {"name":"venterolateral pfc","value":10, "connections": [{"name":"metencephalon", "nt":"glutamate"},{"name":"thalamus", "nt":"glutamate"}]},
                                                 {"name":"ventromedial pfc","value":10},
                                                 {"name":"orbitofrontal pfc","value":10}
                                             ]
@@ -94,7 +94,7 @@
                                         {"name":"putamen","value":10}
                                     ]
                                 },
-                                {"name":"pallidum","alttitles":["globus pallidus"],"value":10, "connections":["frontal lobe","ca4"]},
+                                {"name":"pallidum","alttitles":["globus pallidus"],"value":10, "connections":[{"name":"frontal lobe", "nt":"gaba"},{"name":"ca4", "nt":"dopamine"}]},
                                 {"name":"substantia nigra","value":10},
                                 {"name":"subthalamic nucleus","value":10}
                             ]  
