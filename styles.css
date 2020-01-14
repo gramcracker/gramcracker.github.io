@@ -63,11 +63,6 @@ rect.parent,
 	transition: 0.3s;
 }
 
-.legend text {
-	text-anchor: middle;
-	pointer-events: auto;
-}
-
 .form-group {
 	text-align: left;
 }
@@ -157,4 +152,19 @@ rect.parent,
 /*Web Links*/
 #web_links {
 	font-size: 12px
+}
+
+/*Sankey Legend*/
+#legend {
+	list-style: none;
+}
+
+#legend li {
+	font-size: 10px;
+	display:inline;
+	color: #8992a1;
+}
+
+#legend li:before{
+	content: '\25C6';
 }

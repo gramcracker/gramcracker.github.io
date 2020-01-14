@@ -175,15 +175,14 @@ d3.json("whitematter.json", function(d) {
 	}
 
 	function name(d) {
-		return d.data.name;
-		//uncomment when arrow glyphs are set up.
-		//return breadcrumbs(d);
+		//return d.data.name;
+		return breadcrumbs(d);
 	}
 
 	function breadcrumbs(d) {
 		
 		let res = "";
-		let sep = " <";
+		let sep = " ◁ ";
 		d.ancestors().forEach(function(i){
 			res += i.data.name + sep;
 		});

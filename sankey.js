@@ -16,7 +16,7 @@ const neurotransmitters = {
 	OTHR : "#121212",
 	GLUT : "#80828a",
 	GABA : "#873333",
-	SERA : "#8c5d5d",
+	SERO : "#8c5d5d",
 	DOPA : "#4f4a6b",
 	ACET : "#6c7356",
 	NORE : "#a35a00",
@@ -33,8 +33,8 @@ function colorLink(s){
 		case "gaba":
 		return neurotransmitters.GABA; 
 		break;
-		case "seratonin":
-		return neurotransmitters.SERA;
+		case "serotonin":
+		return neurotransmitters.SERO;
 		break;
 		case "dopamine":
 		return neurotransmitters.DOPA;
@@ -47,6 +47,13 @@ function colorLink(s){
 		break;
 	}
 }
+
+
+//set the colors for the legend
+$("#legend li ").each(function(){
+	let s = $(this).text().toLowerCase();
+	this.style.color =  colorLink(s);
+})
 
 // append the svg object to the body of the page
 var svg2 = d3
