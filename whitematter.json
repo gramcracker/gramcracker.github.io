@@ -1,151 +1,203 @@
 {
-    "name": "central nervous system",
-    "alttitles":["encephalon"],
-    "value":100,
-    "children":
-    [
-        {
-            "name": "forebrain",
-            "alttitles":["prosencephalon"],
-            "value":75,
-            "children":
-            [
-                {
-                    "name": "telencephalon",
-                    "alttitles":["cerebrum"],
-                    "value":75,
-                    "children":
-                    [
-                        {
-                            "name":"cerebral cortex",
-                            "value":25,
-                            "children":
-                            [
-                                {
-                                    "name":"frontal lobe",
-                                    "value":10, 
-                                    "children": 
-                                    [
-                                        {
-                                            "name":"motor cortex",
-                                            "value":10,
-                                            "children": 
-                                            [
-                                                {"name":"primary motor cortex","value":10},
-                                                {"name":"supplementary motor area","value":10},
-                                                {"name":"premotor cortex","value":10}
-                                            ]
-                                        },
-                                        {
-                                            "name":"prefrontal cortex",
-                                            "value":10,
-                                            "children":
-                                            [
-                                                {"name":"dorsomedial pfc","value":10},
-                                                {"name":"dorsolateral pfc","value":10},
-                                                {"name":"venterolateral pfc","value":10, "connections": [{"name":"metencephalon", "nt":"glutamate"},{"name":"thalamus", "nt":"glutamate"}]},
-                                                {"name":"ventromedial pfc","value":10},
-                                                {"name":"orbitofrontal pfc","value":10}
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {"name":"parietal lobe","value":10},
-                                {"name":"occipital lobe","value":10},
-                                {"name":"temporal lobe","value":10}
-                            ]
-                        },
-                        {
-                            "name": "hippocampus",
-                            "alttitles": ["archicortex"],
-                            "value": 25,
-                            "children":
-                            [
-                                {
-                                    "name": "ca1",
-                                    "value":10
-                                    
-                                },
-                                {
-                                    "name": "ca2",
-                                    "value":10
-                                },
-                                {
-                                    "name": "ca3",
-                                    "value":10
-                                },
-                                {
-                                    "name": "ca4",
-                                    "value":10
-                                }
-                            ]
-                        },
-                        {
-                            "name":"basal ganglia",
-                            "value":25,
-                            "children":
-                            [
-                                {
-                                    "name":"striatum",
-                                    "value":10,
-                                    "children": 
-                                    [
-                                        {"name":"caudate","value":10},
-                                        {"name":"putamen","value":10}
-                                    ]
-                                },
-                                {"name":"pallidum","alttitles":["globus pallidus"],"value":10, "connections":[{"name":"frontal lobe", "nt":"gaba"},{"name":"ca4", "nt":"dopamine"}]},
-                                {"name":"substantia nigra","value":10},
-                                {"name":"subthalamic nucleus","value":10}
-                            ]  
-                        }
-                    ]
-                }, 
-                {
-                    "name": "diencephalon",
-                    "value":75,
-                    "children":
-                    [
-                        {
-                            "name":"thalamus",
-                            "value":25
-                        },
-                        {
-                            "name":"hypothalamus",
-                            "value":25
-                        },
-                        {
-                            "name":"mammillary bodies",
-                            "value":25
-                        }
+	"name": "central nervous system",
+	"alttitles":["encephalon"],
+	"value":100,
+	"children":
+	[
+		{
+			"name": "forebrain",
+			"alttitles":["prosencephalon"],
+			"value":75,
+			"children":
+			[
+				{
+					"name": "telencephalon",
+					"alttitles":["cerebrum"],
+					"value":75,
+					"children":
+					[
+						{
+							"name":"cerebral cortex",
+							"value":25,
+							"children":
+							[
+								{
+									"name":"frontal lobe",
+									"value":10, 
+									"children": 
+									[
+										{
+											"name":"motor cortex",
+											"value":10,
+											"children": 
+											[
+												{"name":"primary motor cortex","value":10},
+												{"name":"supplementary motor area","value":10},
+												{"name":"premotor cortex","value":10}
+											]
+										},
+										{
+											"name":"prefrontal cortex",
+											"value":10,
+											"children":
+											[
+												{"name":"dorsomedial pfc","value":10},
+												{"name":"dorsolateral pfc","value":10},
+												{"name":"ventrolateral pfc","value":10},
+												{"name":"ventromedial pfc","value":10},
+												{"name":"orbitofrontal pfc","value":10}
+											]
+										}
+									]
+								},
+								{"name":"parietal lobe","value":10},
+								{"name":"occipital lobe","value":10},
+								{"name":"temporal lobe","value":10}
+							]
+						},
+						{
+							"name": "hippocampus",
+							"alttitles": ["archicortex"],
+							"value": 25,
+							"children":
+							[
+								{
+									"name": "ca1",
+									"value":10
+									
+								},
+								{
+									"name": "ca2",
+									"value":10
+								},
+								{
+									"name": "ca3",
+									"value":10
+								},
+								{
+									"name": "ca4",
+									"value":10
+								}
+							]
+						},
+						{
+							"name":"basal ganglia",
+							"value":25,
+							"children":
+							[
+								{
+									"name":"striatum",
+									"alttitles":["corpus striatum"],
+									"value":10,
+									"children": 
+									[
+										{"name":"caudate", "alttitles":["caudate nucleus"], "value":10},
+										{"name":"globus pallidus","alttitles":["pallidum"],"value":10,
+											"children": 
+											[
+												{"name": "globus pallidus internal", "value":10, "connections":[{"name":"ventral anterior thalamic nucleus","nt":"gaba"},{"name":"ventrolateral thalamic nucleus","nt":"gaba"}]},
+												{"name": "globus pallidus external", "value":10}
+											]
+										},
+										{"name":"putamen","value":10},
+										{"name":"nucleus accumbens","value":10}
+									]
+								},
+								{"name":"amygdala","value":10},
+								{"name":"claustrum","value":10},
+								{"name":"substantia nigra","value":10, "children":
+									[
+										{"name":"pars compacta","value":10},{"name":"pars reticulata","value":10}
+									]
+								},
+								{"name":"subthalamic nucleus","value":10}
+							]  
+						}
+					]
+				}, 
+				{
+					"name": "diencephalon",
+					"value":75,
+					"children":
+					[
+						{
+							"name":"thalamus",
+							"value":25,
+							"children":
+							[
+								{"name":"lateral thalamic nuclei","value":10,
+									"children":
+									[
+										{"name":"pulvinar","value":10},
+										{"name":"lateral dorsal thalamic nucleus","value":10},
+										{"name":"lateral posterior thalamic nucleus","value":10},
+										{"name":"ventral anterior thalamic nucleus","value":10},
+										{"name":"ventrolateral thalamic nucleus","value":10},
+										{"name":"ventroposterior thalamic nucleus","value":10},
+										{"name":"ventral intermediate thalamic nucleus","value":10},
+										{"name":"ventroposteromedial thalamic nucleus","value":10},
+										{"name":"ventroposterolateral thalamic nucleus","value":10}
+									]
+								},
+								{"name":"medial thalamic nuclei","value":10,
+									"children":
+									[
+										{"name":"parvocellular medial thalamic nucleus","value":10},
+										{"name":"magnocellular medial thalamic nucleus","value":10}
+									]
+								},
+								{"name":"anterior thalamic nuclei","value":10,
+									"children":
+									[
+										{"name":"anteroventral thalamic nucleus","value":10},
+										{"name":"anterodorsal thalamic nucleus","value":10},
+										{"name":"anteromedial thalamic nucleus","value":10}
+									]
+								},
+								{"name":"metathalamus","value":10, "children":
+									[
+										{"name":"medial geniculate nucleus","value":10},
+										{"name":"lateral geniculate nucleus","value":10}
+									]
+								}
+							]
+						},
+						{
+							"name":"hypothalamus",
+							"value":25
+						},
+						{
+							"name":"mammillary bodies",
+							"value":25
+						}
 
-                    ]
-                }
-            ]
-        },
-        {
-            "name": "midbrain",
-            "alttitles":["mesencephalon"],
-            "value":75,
-            "children": []
-        },
-        {
-            "name": "hindbrain",
-            "alttitles":["rhombencephalon"],
-            "value":75,
-            "children":
-            [
-                {
-                    "name": "metencephalon",
-                    "value":75,
-                    "children": []
-                },
-                {
-                    "name": "myelencephalon",
-                    "value":75,
-                    "children": []
-                }
-            ]
-        }
-    ]
+					]
+				}
+			]
+		},
+		{
+			"name": "midbrain",
+			"alttitles":["mesencephalon"],
+			"value":75,
+			"children": []
+		},
+		{
+			"name": "hindbrain",
+			"alttitles":["rhombencephalon"],
+			"value":75,
+			"children":
+			[
+				{
+					"name": "metencephalon",
+					"value":75,
+					"children": []
+				},
+				{
+					"name": "myelencephalon",
+					"value":75,
+					"children": []
+				}
+			]
+		}
+	]
 }
