@@ -19,7 +19,7 @@ let y = d3.scaleLinear().domain([0, height]).range([0, height]);
 // adding a color scale
 let colorwheel = 0;
 
-let color = d3.scaleOrdinal(d3.schemeCategory20);
+let colors = d3.scaleOrdinal(d3.schemeCategory20);
 
 let treemap = d3.treemap().size([width, height]).paddingInner(0).round(false);
 
@@ -157,7 +157,7 @@ d3.json("whitematter.json", function(d) {
 		}).attr("height", function(d) {
 			return y(d.y1) - y(d.y0);
 		}).attr("fill", function(d) {
-			return color(colorwheel);
+			return colors(colorwheel);
 
 		});
 	}
@@ -201,32 +201,32 @@ d3.json("whitematter.json", function(d) {
 		}
 		if (d.data.connections) {
 			for (let i in d.data.connections) {
-				color = colorLink(d.data.connections[i].nt);
-				getPath(root, d.data.connections[i].name, dep, map, ref, color);
+				getPath(root, d.data.connections[i], dep, map, ref);
 			}
 		}
 	}
 
-	function getPath(e, name, dep, map, ref, color) {
+	function getPath(searchSpace, connection, dep, map, ref) {
 
-		if (e.data.name == name) {
-			let f = e;
+		if (searchSpace.data.name == connection.name) {
+			let ss = searchSpace;
 
-			if(f.depth > dep){
-				while(f.depth != dep){
-					f = f.parent;
+			if(ss.depth > dep){
+				while(ss.depth != dep){
+					ss = ss.parent;
 				}
 			}
 
+			dashed = connection.commissural ? true : false;
 
-			addPath(map, f.data.name, ref, color);
+			addPath(map, ss.data.name, ref, colorLink(connection.nt), dashed);
 		}
-		if (e.children) {
-			for (let i in e.children) getPath(e.children[i], name, dep, map, ref, color);
+		if (searchSpace.children) {
+			for (let i in searchSpace.children) getPath(searchSpace.children[i], connection, dep, map, ref);
 		}
 	}
 
-	function addPath(map, destinationName, originIndex, color) {
+	function addPath(map, destinationName, originIndex, color, dashed) {
 		let target = 0;
 		for(i = 0; i < map.nodes.length; i++) {
 			if (map.nodes[i].name === destinationName) {
@@ -250,7 +250,8 @@ d3.json("whitematter.json", function(d) {
 			"source": originIndex,
 			"target": target,
 			"value": 1,
-			"color": color
+			"color": color,
+			"dashed":dashed
 		});
 		return map;
 	}

@@ -96,7 +96,7 @@
 											"children": 
 											[
 												{"name": "globus pallidus internal", "value":10, "connections":[{"name":"ventral anterior thalamic nucleus","nt":"gaba"},{"name":"ventrolateral thalamic nucleus","nt":"gaba"}]},
-												{"name": "globus pallidus external", "value":10}
+												{"name": "globus pallidus external", "value":10, "connections":[{"name":"pulvinar","nt":"dopamine", "commissural":"true"}]}
 											]
 										},
 										{"name":"putamen","value":10},

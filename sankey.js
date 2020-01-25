@@ -77,7 +77,19 @@ function loadSankey(graph) {
 	svg2.selectAll("g").remove();
 
 	//uncomment to add filters
-	//const defs = svg.append('defs');
+	const defs = svg2.append('defs')
+	.append("pattern")
+		.attr("id","diagonals")
+		.attr("width", "8")
+		.attr("height","8")
+		.attr("patternUnits","userSpaceOnUse")
+		.attr("patternTransform", "rotate(45)")
+		.append("rect")
+		.attr("width","7")
+		.attr("height","10")
+		.attr("transform","translate(0,0)")
+		.attr("fill","white");
+
 
 	console.log(graph);
 
@@ -95,12 +107,9 @@ function loadSankey(graph) {
 	.append("path")
 	.attr("class", "link")
 	.attr("d", path)
-	.style("stroke", function(d){
-		return d.color;
-	})
-	.style("stroke-width", function(d) {
-		return Math.max(1, d.dy);
-	})
+	.style("stroke", d => d.color)
+	.style("stroke-dasharray", d => d.dashed?"3 1":"")
+	.style("stroke-width", d => Math.max(1, d.dy))
 	.sort(function(a, b) {
 		return d3.descending(a.dy, b.dy);
 	});
@@ -150,7 +159,8 @@ function loadSankey(graph) {
 	.attr("width", sankey.nodeWidth())
 	.style("fill", function(d) {
 	  colorwheel++;
-	  return (d.color = color(colorwheel));
+	  d.color = colors(colorwheel);
+	  return (d.color);
 	})
 	.style("stroke-width", 0)
 	.append("title")
